@@ -13,7 +13,7 @@ CREATE_FOLDER = mkdir -p
 DELETE_FOLDER = rm -rf
 
 lib: $(OBJ)
-	ar rcs bin/libents.a $<
+	ar rcs bin/libents.a $^
 
 sandbox: sandbox/main.c src/ents.h lib
 	$(CC) $< -L/home/radam/repos/ents/bin -lents -o bin/$@ $(CFLAGS)
@@ -21,6 +21,9 @@ sandbox: sandbox/main.c src/ents.h lib
 
 obj/%.o: src/%.c folders
 	$(CC) -c $< -o $@ $(CFLAGS)
+
+val: sandbox
+	valgrind --leak-check=full ./bin/sandbox
 
 .PHONY: clean folders help
 
