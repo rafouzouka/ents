@@ -16,9 +16,9 @@ void Queue_print(const Queue *self)
     LinkedList_print(&self->ll);
 }
 
-void Queue_enqueue(Queue *self, char c)
+void Queue_enqueue(Queue *self, void *data)
 {
-    LinkedList_insert_tail(&self->ll, c);
+    LinkedList_insert_tail(&self->ll, data);
 }
 
 void Queue_dequeue(Queue *self)

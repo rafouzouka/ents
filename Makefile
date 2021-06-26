@@ -1,7 +1,7 @@
 # -*- MakeFile -*-
 
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c11
+CFLAGS = -Wall -Wextra -std=c11 -g
 INC = -lm
 EXEC = prog
 

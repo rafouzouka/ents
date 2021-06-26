@@ -39,7 +39,7 @@ void LinkedList_insert_index(LinkedList *self, char data, int64_t index);
 void LinkedList_insert_head(LinkedList *self, void *data);
 
 // insert tail
-void LinkedList_insert_tail(LinkedList *self, char data);
+void LinkedList_insert_tail(LinkedList *self, void *data);
 
 // remove index
 void LinkedList_remove_index(LinkedList *self, int64_t index);

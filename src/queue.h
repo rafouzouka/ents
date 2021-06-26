@@ -16,7 +16,7 @@ void Queue_drop(Queue *self);
 
 void Queue_print(const Queue *self);
 
-void Queue_enqueue(Queue *self, char c);
+void Queue_enqueue(Queue *self, void *data);
 
 void Queue_dequeue(Queue *self);
 
