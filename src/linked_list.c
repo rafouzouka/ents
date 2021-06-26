@@ -174,13 +174,16 @@ void LinkedList_remove_index(LinkedList *self, int64_t index)
     self->length--;
 }
 
-void LinkedList_remove_head(LinkedList *self)
+// You must free the void* after using the data
+void *LinkedList_remove_head(LinkedList *self)
 {
     Node *temp = self->head->next;
-    free(self->head->data);
+    void *data = self->head->data; 
+    // free(self->head->data);
     free(self->head);
     self->head = temp;
     self->length--;
+    return data;
 }
 
 static void _set_data(Node *node, void *src, uint64_t size)

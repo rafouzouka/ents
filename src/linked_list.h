@@ -45,6 +45,6 @@ void LinkedList_insert_tail(LinkedList *self, void *data);
 void LinkedList_remove_index(LinkedList *self, int64_t index);
 
 // remove head
-void LinkedList_remove_head(LinkedList *self);
+void *LinkedList_remove_head(LinkedList *self);
 
 #endif

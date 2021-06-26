@@ -20,14 +20,19 @@ void EntityManager_Drop(EntityManager *self)
     self = NULL;
 }
 
-// Entity EntityManager_CreateEntity(EntityManager *self)
-// {
-//     if (self->queueSize <= 0)
-//     {
-//         Entity newEntity = { self->nextId };
-//         self->nextId++;
-//         return newEntity;
-//     }
+Entity EntityManager_CreateEntity(EntityManager *self)
+{
+    if (self->queueSize <= 0)
+    {
+        Entity newEntity = { self->nextId };
+        self->nextId++;
+        return newEntity;
+    }
 
-//     //Queue_dequeue(Queue *self)
-// }
+    uint64_t *data_ptr = Queue_dequeue(&self->ids);
+    Entity e = { *data_ptr };
+    free(data_ptr);
+    self->queueSize--;
+
+    return e;
+}

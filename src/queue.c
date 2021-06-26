@@ -22,9 +22,10 @@ void Queue_enqueue(Queue *self, void *data)
     LinkedList_insert_tail(&self->ll, data);
 }
 
-void Queue_dequeue(Queue *self)
+// You must free the void* after using the data
+void *Queue_dequeue(Queue *self)
 {
-    LinkedList_remove_head(&self->ll);
+    return LinkedList_remove_head(&self->ll);
 }
 
 bool Queue_contains(const Queue *self, void *data)
