@@ -5,7 +5,7 @@
 
 #include "linked_list.h"
 
-typedef struct Queue
+typedef struct
 {
     LinkedList ll;
 } Queue;

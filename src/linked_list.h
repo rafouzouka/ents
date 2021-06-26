@@ -3,13 +3,13 @@
 
 #include <stdint.h>
 
-typedef struct Node
+typedef struct
 {
     void *data;
     void *next;
 } Node;
 
-typedef struct LinkedList
+typedef struct
 {
     const uint64_t dataSize;
     Node *head;
