@@ -36,3 +36,9 @@ Entity EntityManager_CreateEntity(EntityManager *self)
 
     return e;
 }
+
+void EntityManager_DestroyEntity(EntityManager *self, Entity entity)
+{
+    Queue_enqueue(&self->ids, &entity.id);
+    self->queueSize++;
+}

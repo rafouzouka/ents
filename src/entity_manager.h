@@ -18,4 +18,6 @@ void EntityManager_Drop(EntityManager *self);
 
 Entity EntityManager_CreateEntity(EntityManager *self);
 
+void EntityManager_DestroyEntity(EntityManager *self, Entity entity);
+
 #endif

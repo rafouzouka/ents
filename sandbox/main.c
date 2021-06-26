@@ -14,6 +14,15 @@ int main()
     printf("Entity ID: %ld\n", entity2.id);
     printf("Entity ID: %ld\n", entity3.id);
 
+    // EntityManager_DestroyEntity(&em, entity2);
+    EntityManager_DestroyEntity(&em, entity3);
+
+    Entity entity4 = EntityManager_CreateEntity(&em);
+    Entity entity5 = EntityManager_CreateEntity(&em);
+
+    printf("Entity ID: %ld\n", entity4.id);
+    printf("Entity ID: %ld\n", entity5.id);
+
     EntityManager_Drop(&em);
     return EXIT_SUCCESS;
 }
