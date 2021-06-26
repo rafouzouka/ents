@@ -61,52 +61,52 @@ void LinkedList_print(const LinkedList *self)
     printf("NULL\n\n");
 }
 
-// int64_t LinkedList_find(const LinkedList *self, char data)
-// {
-//     int64_t index = 0;
-//     Node *currentNode = self->head;
-//     while (currentNode != NULL)
-//     {
-//         if (data == currentNode->data)
-//         {
-//             return index;
-//         }
-//         currentNode = currentNode->next;
-//         index++;
-//     }
-//     return -1;
-// }
+int64_t LinkedList_find(const LinkedList *self, void *data)
+{
+    int64_t index = 0;
+    Node *currentNode = self->head;
+    while (currentNode != NULL)
+    {
+        if (memcmp(currentNode->data, data, self->dataSize) == 0)
+        {
+            return index;
+        }
+        currentNode = currentNode->next;
+        index++;
+    }
+    return -1;
+}
 
 int64_t LinkedList_length(const LinkedList *self)
 {
     return self->length;
 }
 
-// void LinkedList_insert_index(LinkedList *self, char data, int64_t index)
-// {
-//     if (index <= 0)
-//     {
-//         LinkedList_insert_head(self, data);
-//     }
-//     else if (index >= self->length-1)
-//     {
-//         LinkedList_insert_tail(self, data);
-//     }
-//     else
-//     {
-//         Node *new_node = malloc(sizeof(Node));
-//         new_node->data = data;
+void LinkedList_insert_index(LinkedList *self, void *data, int64_t index)
+{
+    if (index <= 0)
+    {
+        LinkedList_insert_head(self, data);
+    }
+    else if (index >= self->length-1)
+    {
+        LinkedList_insert_tail(self, data);
+    }
+    else
+    {
+        Node *new_node = malloc(sizeof(Node));
+        _set_data(new_node, data, self->dataSize);
         
-//         Node *currentNode = self->head;
-//         for (int64_t i = 0; i < index-1; i++)
-//         {
-//             currentNode = currentNode->next;
-//         }
-//         new_node->next = currentNode->next;
-//         currentNode->next = new_node;
-//         self->length++;
-//     }
-// }
+        Node *currentNode = self->head;
+        for (int64_t i = 0; i < index-1; i++)
+        {
+            currentNode = currentNode->next;
+        }
+        new_node->next = currentNode->next;
+        currentNode->next = new_node;
+        self->length++;
+    }
+}
 
 void LinkedList_insert_head(LinkedList *self, void *data)
 {

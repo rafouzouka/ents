@@ -26,9 +26,9 @@ void Queue_dequeue(Queue *self)
     LinkedList_remove_head(&self->ll);
 }
 
-bool Queue_contains(const Queue *self, char c)
+bool Queue_contains(const Queue *self, void *data)
 {
-    if (LinkedList_find(&self->ll, c) != -1)
+    if (LinkedList_find(&self->ll, data) != -1)
     {
         return true;
     }

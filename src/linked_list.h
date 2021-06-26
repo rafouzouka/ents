@@ -27,13 +27,13 @@ void LinkedList_drop(LinkedList *self);
 void LinkedList_print(const LinkedList *self);
 
 // search
-int64_t LinkedList_find(const LinkedList *self, char data);
+int64_t LinkedList_find(const LinkedList *self, void *data);
 
 // get length
 int64_t LinkedList_length(const LinkedList *self);
 
 // insert index
-void LinkedList_insert_index(LinkedList *self, char data, int64_t index);
+void LinkedList_insert_index(LinkedList *self, void *data, int64_t index);
 
 // insert head
 void LinkedList_insert_head(LinkedList *self, void *data);

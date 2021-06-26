@@ -20,7 +20,7 @@ void Queue_enqueue(Queue *self, void *data);
 
 void Queue_dequeue(Queue *self);
 
-bool Queue_contains(const Queue *self, char c);
+bool Queue_contains(const Queue *self, void *data);
 
 bool IsEmpty(const Queue *self);
 
