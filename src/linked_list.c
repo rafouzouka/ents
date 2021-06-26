@@ -151,8 +151,8 @@ void LinkedList_remove_index(LinkedList *self, int64_t index)
     if (index == 0)
     {
         Node *nextNode = self->head->next;
-        free(self->head);
         free(self->head->data);
+        free(self->head);
         self->head = nextNode;
         return;
     }
@@ -177,8 +177,8 @@ void LinkedList_remove_index(LinkedList *self, int64_t index)
 void LinkedList_remove_head(LinkedList *self)
 {
     Node *temp = self->head->next;
-    free(self->head);
     free(self->head->data);
+    free(self->head);
     self->head = temp;
     self->length--;
 }

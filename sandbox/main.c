@@ -28,6 +28,7 @@ int main()
     printf("size: %ld\n", LinkedList_length(&ll));
     LinkedList_print(&ll);
 
+    // LinkedList_remove_head(&ll);
     LinkedList_remove_index(&ll, 0);
     printf("size: %ld\n", LinkedList_length(&ll));
     LinkedList_print(&ll);
