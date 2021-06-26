@@ -1,8 +1,9 @@
 #include "queue.h"
+#include <stdint.h>
 
-Queue Queue_value()
+Queue Queue_value(uint64_t size)
 {
-    Queue q = { LinkedList_value(sizeof(char)) };
+    Queue q = { LinkedList_value(size) };
     return q;
 }
 

@@ -13,7 +13,9 @@ typedef struct {
 } EntityManager;
 
 EntityManager EntityManager_Value();
+
 void EntityManager_Drop(EntityManager *self);
+
 Entity EntityManager_CreateEntity(EntityManager *self);
 
 #endif

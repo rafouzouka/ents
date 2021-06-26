@@ -10,7 +10,7 @@ typedef struct Queue
     LinkedList ll;
 } Queue;
 
-Queue Queue_value();
+Queue Queue_value(uint64_t size);
 
 void Queue_drop(Queue *self);
 

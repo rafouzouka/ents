@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 
 #include "queue.h"
@@ -6,7 +7,7 @@
 EntityManager EntityManager_Value()
 {
     EntityManager em = {
-        Queue_value(),
+        Queue_value(sizeof(uint64_t)),
         0,
         0
     };
