@@ -127,12 +127,6 @@ void LinkedList_insert_head(LinkedList *self, void *data)
     self->length++;
 }
 
-static void _set_data(Node *node, void *src, uint64_t size)
-{
-    node->data = malloc(size);
-    memcpy(node->data, src, size);
-}
-
 void LinkedList_insert_tail(LinkedList *self, void *data)
 {
     Node *new_node = malloc(sizeof(Node));
@@ -152,24 +146,45 @@ void LinkedList_insert_tail(LinkedList *self, void *data)
     self->length++;
 }
 
-// void LinkedList_remove_index(LinkedList *self, int64_t index)
-// {
-//     Node *currentNode = self->head;
-//     for (int64_t i = 0; i < index-1; i++)
-//     {
-//         currentNode = currentNode->next;
-//     }
-//     Node *temp = currentNode->next;
-//     temp = temp->next;
-//     free(currentNode->next);
-//     currentNode->next = temp;
-//     self->length--;
-// }
+void LinkedList_remove_index(LinkedList *self, int64_t index)
+{
+    if (index == 0)
+    {
+        Node *nextNode = self->head->next;
+        free(self->head);
+        free(self->head->data);
+        self->head = nextNode;
+        return;
+    }
 
-// void LinkedList_remove_head(LinkedList *self)
-// {
-//     Node *temp = self->head->next;
-//     free(self->head);
-//     self->head = temp;
-//     self->length--;
-// }
+    Node *currentNode = self->head;
+
+    for (int64_t i = 0; i <= index-2; i++)
+    {
+        currentNode = currentNode->next;
+    }
+
+    Node *nodeToFree = currentNode->next;
+    Node *nextNode = nodeToFree->next;
+
+    free(nodeToFree->data);
+    free(nodeToFree);
+
+    currentNode->next = nextNode;
+    self->length--;
+}
+
+void LinkedList_remove_head(LinkedList *self)
+{
+    Node *temp = self->head->next;
+    free(self->head);
+    free(self->head->data);
+    self->head = temp;
+    self->length--;
+}
+
+static void _set_data(Node *node, void *src, uint64_t size)
+{
+    node->data = malloc(size);
+    memcpy(node->data, src, size);
+}
