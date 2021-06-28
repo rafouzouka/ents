@@ -23,7 +23,7 @@ obj/%.o: src/%.c folders
 	$(CC) -c $< -o $@ $(CFLAGS)
 
 val: sandbox
-	valgrind --leak-check=full ./bin/sandbox
+	valgrind --leak-check=full --track-origins=yes ./bin/sandbox
 
 .PHONY: clean folders help
 

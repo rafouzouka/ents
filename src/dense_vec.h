@@ -10,8 +10,8 @@
 
 typedef enum
 {
-    EMPTY,
-    DATA
+    LookupState_EMPTY,
+    LookupState_DATA
 } LookupState;
 
 typedef struct

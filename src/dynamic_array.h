@@ -19,6 +19,8 @@ void DynamicArray_print(const DynamicArray *self);
 
 void DynamicArray_map(const DynamicArray *self, void (*map)(const void *data));
 
+uint64_t DynamicArray_find(DynamicArray *self, const void *dataToFind);
+
 void DynamicArray_insert(DynamicArray *self, uint64_t index, const void *data);
 
 const void *DynamicArray_get(DynamicArray *self, uint64_t index);

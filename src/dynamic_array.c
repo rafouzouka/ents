@@ -36,10 +36,25 @@ void DynamicArray_print(const DynamicArray *self)
 void DynamicArray_map(const DynamicArray *self, void (*map)(const void *data))
 {
     int8_t *buffer = self->buffer;
-    for (uint64_t i = 0; i <= self->length; i++)
+    for (uint64_t i = 0; i < self->capacity; i++)
     {
         map(&buffer[i * self->item_size]);
     }
+}
+
+// ici on n'a pas trouvé de moyen de dire qu'on a rien trouvé
+uint64_t DynamicArray_find(DynamicArray *self, const void *dataToFind)
+{
+    int8_t *buffer = self->buffer;
+    for (uint64_t i = 0; i < self->capacity; i++)
+    {
+        if (memcmp(&buffer[i * self->item_size], dataToFind, self->item_size) == 0)
+        {
+            return i;
+        }
+    }
+    printf("[ERROR]: Unable to find the item");
+    exit(EXIT_FAILURE);
 }
 
 void DynamicArray_insert(DynamicArray *self, uint64_t index, const void *data)

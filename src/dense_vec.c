@@ -25,18 +25,63 @@ void DenseVec_Drop(DenseVec *self)
     DynamicArray_drop(&self->data);
 }
 
-// void DenseVec_Print(const DenseVec *self)
-// {
-//     // to change this
-//     // printf("Lookup Table:\n");
+static void _print_lookup(const void* data)
+{
+    const LookupCell *lc = data;
 
-//     // printf("Data   Table:\n");
+    if (lc->state == LookupState_EMPTY)
+    {
+        printf("[N] ");
+    }
+    else if (lc-> state == LookupState_DATA)
+    {
+        printf("[%lu] ", lc->index);
+    }
+}
 
-//     // printf("Data length: %ld\n", self->dataArrayLength);
-// }
+void DenseVec_Print(const DenseVec *self)
+{
+    printf("Lookup Table:\n");
+    DynamicArray_map(&self->lookup, _print_lookup);
+    printf("\n");
+}
 
-// void DenseVec_Insert(DenseVec *self, uint64_t index, const void *data)
-// {
-//     DynamicArray_insert(&self->lookup, index, &self->dataArrayLength);
-//     self->dataArrayLength++;
-// }
+void DenseVec_Insert(DenseVec *self, uint64_t index, const void *data)
+{
+    LookupCell newCell = {
+        LookupState_DATA,
+        self->dataArrayLength
+    };
+    DynamicArray_insert(&self->lookup, index, &newCell);
+    DynamicArray_insert(&self->data, self->dataArrayLength, data);
+    self->dataArrayLength++;
+}
+
+// ici certainement une erreur s'il n'y avait rien de base
+// a verifier
+void DenseVec_Remove(DenseVec *self, uint64_t index)
+{
+    LookupCell clearedCell = {
+        LookupState_EMPTY,
+        0
+    };
+    const LookupCell *currentCell = DynamicArray_get(&self->lookup, index);
+    // uint64_t dataIndexToRemove = currentCell->index;
+    DynamicArray_insert(&self->lookup, index, &clearedCell);
+
+    uint64_t lookupCellIndexDataToFind = self->dataArrayLength - 1;
+
+    printf("lookupitem: %lu\n", lookupCellIndexDataToFind);
+
+    // LookupCell cellToFind = {
+    //     LookupState_DATA,
+    //     lookupCellIndexDataToFind
+    // };
+    // uint64_t res = DynamicArray_find(&self->lookup, &cellToFind);
+
+    // printf("res: %lu\n", res);
+
+    // const void *data = DynamicArray_get(&self->data, self->dataArrayLength-1);
+    
+    // DynamicArray_insert(&self->lookup, da, const void *data)
+}
