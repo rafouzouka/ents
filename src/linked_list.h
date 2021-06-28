@@ -27,19 +27,19 @@ void LinkedList_drop(LinkedList *self);
 void LinkedList_print(const LinkedList *self);
 
 // search
-int64_t LinkedList_find(const LinkedList *self, void *data);
+int64_t LinkedList_find(const LinkedList *self, const void *data);
 
 // get length
 int64_t LinkedList_length(const LinkedList *self);
 
 // insert index
-void LinkedList_insert_index(LinkedList *self, void *data, int64_t index);
+void LinkedList_insert_index(LinkedList *self, const void *data, int64_t index);
 
 // insert head
-void LinkedList_insert_head(LinkedList *self, void *data);
+void LinkedList_insert_head(LinkedList *self, const void *data);
 
 // insert tail
-void LinkedList_insert_tail(LinkedList *self, void *data);
+void LinkedList_insert_tail(LinkedList *self, const void *data);
 
 // remove index
 void LinkedList_remove_index(LinkedList *self, int64_t index);

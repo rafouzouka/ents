@@ -6,7 +6,7 @@
 
 #include "linked_list.h"
 
-static void _set_data(Node *node, void *src, uint64_t size);
+static void _set_data(Node *node, const void *src, uint64_t size);
 
 LinkedList LinkedList_value(uint64_t dataSize)
 {
@@ -22,6 +22,7 @@ void LinkedList_drop(LinkedList *self)
     {
         nextNode = currentNode->next;
         free(currentNode->data);
+        currentNode->data = NULL;
         free(currentNode);
         currentNode = nextNode;
     }
@@ -61,7 +62,7 @@ void LinkedList_print(const LinkedList *self)
     printf("NULL\n\n");
 }
 
-int64_t LinkedList_find(const LinkedList *self, void *data)
+int64_t LinkedList_find(const LinkedList *self, const void *data)
 {
     int64_t index = 0;
     Node *currentNode = self->head;
@@ -82,7 +83,7 @@ int64_t LinkedList_length(const LinkedList *self)
     return self->length;
 }
 
-void LinkedList_insert_index(LinkedList *self, void *data, int64_t index)
+void LinkedList_insert_index(LinkedList *self, const void *data, int64_t index)
 {
     if (index <= 0)
     {
@@ -108,7 +109,7 @@ void LinkedList_insert_index(LinkedList *self, void *data, int64_t index)
     }
 }
 
-void LinkedList_insert_head(LinkedList *self, void *data)
+void LinkedList_insert_head(LinkedList *self, const void *data)
 {
     Node *new_node = malloc(sizeof(Node));
     
@@ -127,7 +128,7 @@ void LinkedList_insert_head(LinkedList *self, void *data)
     self->length++;
 }
 
-void LinkedList_insert_tail(LinkedList *self, void *data)
+void LinkedList_insert_tail(LinkedList *self, const void *data)
 {
     Node *new_node = malloc(sizeof(Node));
 
@@ -186,7 +187,7 @@ void *LinkedList_remove_head(LinkedList *self)
     return data;
 }
 
-static void _set_data(Node *node, void *src, uint64_t size)
+static void _set_data(Node *node, const void *src, uint64_t size)
 {
     node->data = malloc(size);
     memcpy(node->data, src, size);

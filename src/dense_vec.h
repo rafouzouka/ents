@@ -4,8 +4,17 @@
 // Redirection [] [] [] []
 // Data        [] [] [] []
 
-// typedef struct {
+#include <stdint.h>
 
-// } DenseVec;
+#include "dynamic_array.h"
+
+typedef struct {
+    DynamicArray lookup;
+    DynamicArray data;
+} DenseVec;
+
+DenseVec DenseVec_Value(uint64_t dataByteSize);
+
+void DenseVec_Insert(DenseVec *self, uint64_t index, const void *data);
 
 #endif
