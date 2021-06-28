@@ -17,16 +17,6 @@ int main()
 
     // DenseVec_Insert(&dv, 0, &p);
 
-
-
-
-
-
-
-
-
-
-
     // DenseVec_Drop(&dv);
     return EXIT_SUCCESS;
 }
