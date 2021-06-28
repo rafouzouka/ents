@@ -5,26 +5,26 @@
 
 typedef struct
 {
-    int64_t item_size;
-    int64_t length;
-    int64_t capacity;
+    uint64_t item_size;
+    uint64_t length;
+    uint64_t capacity;
     void *buffer;
 } DynamicArray;
 
-DynamicArray DynamicArray_value(int64_t capacity, int64_t item_size);
+DynamicArray DynamicArray_value(uint64_t capacity, uint64_t item_size);
 
 void DynamicArray_drop(DynamicArray *self);
 
 void DynamicArray_print(const DynamicArray *self);
 
-void DynamicArray_data(const DynamicArray *self);
+void DynamicArray_map(const DynamicArray *self, void (*map)(const void *data));
 
-void DynamicArray_insert(DynamicArray *self, int64_t index, const void *data);
+void DynamicArray_insert(DynamicArray *self, uint64_t index, const void *data);
 
-const void *DynamicArray_get(DynamicArray *self, int64_t index);
+const void *DynamicArray_get(DynamicArray *self, uint64_t index);
 
 void DynamicArray_clear(DynamicArray *self);
 
-int64_t DynamicArray_length(DynamicArray *self);
+uint64_t DynamicArray_length(DynamicArray *self);
 
 #endif

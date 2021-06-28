@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -5,15 +6,15 @@
 #include "dynamic_array.h"
 
 static void _OOM_GUARD(void *ptr, char *file_name, int line_number);
-static void _ensure_capacity(DynamicArray *self, int64_t wanted_capacity);
+static void _ensure_capacity(DynamicArray *self, uint64_t wanted_capacity);
 
-DynamicArray DynamicArray_value(int64_t capacity, int64_t item_size)
+DynamicArray DynamicArray_value(uint64_t capacity, uint64_t item_size)
 {
     DynamicArray da = {
         item_size,
         0,
         capacity,
-        calloc(capacity, sizeof(item_size)),
+        calloc(capacity, item_size),
     };
     _OOM_GUARD(da.buffer, __FILE__, __LINE__);
     return da;
@@ -32,19 +33,16 @@ void DynamicArray_print(const DynamicArray *self)
     printf("Item Size: %ld, Capacity: %ld, Length: %ld\n", self->item_size, self->capacity, self->length);
 }
 
-void DynamicArray_data(const DynamicArray *self)
+void DynamicArray_map(const DynamicArray *self, void (*map)(const void *data))
 {
-    char *buffer = self->buffer;
-    int64_t capacity = self->capacity; 
-
-    for (int64_t i = 0; i < capacity; i++)
+    int8_t *buffer = self->buffer;
+    for (uint64_t i = 0; i <= self->length; i++)
     {
-        printf("[%c], ", buffer[i]);
+        map(&buffer[i * self->item_size]);
     }
-    printf("\n");
 }
 
-void DynamicArray_insert(DynamicArray *self, int64_t index, const void *data)
+void DynamicArray_insert(DynamicArray *self, uint64_t index, const void *data)
 {
     _ensure_capacity(self, index+1);
     if (index > self->length)
@@ -52,10 +50,10 @@ void DynamicArray_insert(DynamicArray *self, int64_t index, const void *data)
         self->length = index;
     }
     int8_t *buffer = self->buffer;
-    memcpy(&buffer[index], data, self->item_size);
+    memcpy(&buffer[index * self->item_size], data, self->item_size);
 }
 
-const void *DynamicArray_get(DynamicArray *self, int64_t index)
+const void *DynamicArray_get(DynamicArray *self, uint64_t index)
 {
     int8_t *buffer = self->buffer;
     return &buffer[index * self->item_size];
@@ -68,7 +66,7 @@ void DynamicArray_clear(DynamicArray *self)
     self->length = 0;
 }
 
-int64_t DynamicArray_length(DynamicArray *self)
+uint64_t DynamicArray_length(DynamicArray *self)
 {
     return self->length;
 }
@@ -82,7 +80,7 @@ static void _OOM_GUARD(void *ptr, char *file_name, int line_number)
     }
 }
 
-static void _ensure_capacity(DynamicArray *self, int64_t wanted_capacity)
+static void _ensure_capacity(DynamicArray *self, uint64_t wanted_capacity)
 {
     if (self->capacity < wanted_capacity)
     {

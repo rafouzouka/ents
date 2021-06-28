@@ -28,14 +28,15 @@ typedef struct {
 
 DenseVec DenseVec_Value(uint64_t dataByteSize);
 
+void DenseVec_Drop(DenseVec *self);
+
+void DenseVec_Print(const DenseVec *self);
+
 // !! attention a la valeur de LookupCell il est
 // possible que ce ne soit pas empty par défaut
-
 // !! On ne doit pas pouvoir insérer deux fois au même endroit
 void DenseVec_Insert(DenseVec *self, uint64_t index, const void *data);
 
 void DenseVec_Remove(DenseVec *self, uint64_t index);
-
-void DenseVec_Drop(DenseVec *self);
 
 #endif
