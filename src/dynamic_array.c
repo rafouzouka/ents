@@ -86,8 +86,14 @@ static void _ensure_capacity(DynamicArray *self, int64_t wanted_capacity)
 {
     if (self->capacity < wanted_capacity)
     {
+
+        self->buffer = realloc(self->buffer, wanted_capacity * self->item_size);
+
+        int8_t *buffer = self->buffer;
+        memset(&buffer[self->capacity * self->item_size], 0, (wanted_capacity - self->capacity) * self->item_size);
+
         self->capacity = wanted_capacity;
-        self->buffer = realloc(self->buffer, self->capacity * self->item_size);
+
         _OOM_GUARD(self->buffer, __FILE__, __LINE__);
     }
 }
