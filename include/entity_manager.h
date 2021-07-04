@@ -8,6 +8,8 @@
 //     uint64_t nextId;
 // } EntityManager;
 
+void ents_create_queue();
+
 // EntityManager EntityManager_Value();
 
 // void EntityManager_Drop(EntityManager *self);

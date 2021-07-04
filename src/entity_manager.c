@@ -1,4 +1,15 @@
+#include <dats/dats.h>
+#include <dats/queue.h>
+
 #include "entity_manager.h"
+
+void ents_create_queue()
+{
+    dats_queue_t t = dats_queue_new(sizeof(char));
+
+    dats_queue_free(&t);
+}
+
 
 // EntityManager EntityManager_Value()
 // {

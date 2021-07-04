@@ -4,7 +4,7 @@
 
 extern "C"
 {
-    #include "../src/ents.h"
+    #include <ents/ents.h>
 
     typedef struct
     {
