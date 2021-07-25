@@ -11,6 +11,7 @@ typedef struct
 {
     dats_queue_t available_ids;
     uint64_t next_higher_available_id;
+    // peut etre ajouter living entity count
 } ents_entity_manager_t;
 
 ents_entity_manager_t ents_entity_manager_new();

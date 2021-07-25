@@ -4,5 +4,6 @@
 // look if its needed to create a generational arena to 
 // dectect for invalid entity
 #include "entity_manager.h"
+#include "component_manager.h"
 
 #endif

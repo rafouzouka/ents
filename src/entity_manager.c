@@ -1,3 +1,5 @@
+#include <dats/bitset.h>
+#include <dats/dynamic_array.h>
 #include <stdint.h>
 #include <stdlib.h>
 
@@ -8,12 +10,13 @@
 // pb la reference de l'entity existe toujours
 // on peut supprimer deux fois la même entity
 // ou indexer un truc suppr
+// certainement utiliser un Generation Index
 
 ents_entity_manager_t ents_entity_manager_new()
 {
     ents_entity_manager_t em = {
         .available_ids = dats_queue_new(sizeof(uint64_t)),
-        .next_higher_available_id = 0
+        .next_higher_available_id = 0,
     };
     return em;
 }
