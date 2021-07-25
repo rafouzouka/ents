@@ -6,6 +6,6 @@
 typedef struct
 {
     uint64_t id;
-} Entity;
+} ents_entity_t;
 
 #endif

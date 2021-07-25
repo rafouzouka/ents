@@ -1,6 +1,8 @@
 #ifndef ENTS_H
 #define ENTS_H
 
+// look if its needed to create a generational arena to 
+// dectect for invalid entity
 #include "entity_manager.h"
 
 #endif

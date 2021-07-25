@@ -17,7 +17,7 @@ DELETE_FOLDER = rm -rf
 lib: $(OBJ)
 	ar rcs bin/$(LIB) $^
 
-debug: sandbox/main.c lib
+debug: sandbox/main.c include/ents.h install
 	$(CC) $< -lents -ldats -o bin/$@ $(CFLAGS)
 	./bin/$@
 
@@ -27,7 +27,7 @@ obj/%.o: src/%.c folders
 val: debug
 	valgrind --leak-check=full --track-origins=yes ./bin/debug
  
-test: lib 
+test: install 
 	cmake -S test/ -B test/build
 	cmake --build test/build
 	ctest --test-dir test/build/ --output-on-failure
