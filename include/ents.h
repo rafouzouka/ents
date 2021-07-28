@@ -7,5 +7,6 @@
 #include "component_manager.h"
 
 #include "world.h"
+#include "macro.h"
 
 #endif

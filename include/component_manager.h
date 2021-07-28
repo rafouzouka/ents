@@ -13,7 +13,7 @@ typedef struct
 
 ents_component_manager_t ents_component_manager_new();
 
-void ents_component_manager_register(ents_component_manager_t *self, uint64_t data_size);
+uint64_t ents_component_manager_register(ents_component_manager_t *self, uint64_t data_size);
 
 void ents_component_manager_set(ents_component_manager_t *self, ents_entity_t entity, uint64_t component_type, const void *data);
 

@@ -1,6 +1,7 @@
 #include "world.h"
 #include "component_manager.h"
 #include "entity_manager.h"
+#include <stdint.h>
 
 ents_world_t ents_world_new()
 {
@@ -22,9 +23,12 @@ void ents_world_destroy_entity(ents_world_t *self, ents_entity_t entity)
     ents_entity_manager_destroy_entity(&self->em, entity);
 }
 
-void ents_world_register(ents_world_t *self, uint64_t data_size)
+uint64_t ents_world_register(ents_world_t *self, uint64_t data_size)
 {
-    ents_component_manager_register(&self->cm, data_size);
+    uint64_t component_id = ents_component_manager_register(&self->cm, data_size);
+    ents_entity_manager_set_bitset_size(&self->em, component_id + 1);
+
+    return component_id;
 }
 
 void ents_world_set(ents_world_t *self, ents_entity_t entity, uint64_t component_type, const void *data)
@@ -44,6 +48,7 @@ void *ents_world_ref(ents_world_t *self, ents_entity_t entity, uint64_t componen
 
 void ents_world_print(const ents_world_t *self)
 {
+    ents_entity_manager_print(&self->em);
     ents_component_manager_print(&self->cm);
 }
 

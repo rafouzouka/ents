@@ -18,12 +18,13 @@ ents_component_manager_t ents_component_manager_new()
     return cm;
 }
 
-void ents_component_manager_register(ents_component_manager_t *self, uint64_t data_size)
+uint64_t ents_component_manager_register(ents_component_manager_t *self, uint64_t data_size)
 {
     dats_dense_array_t da = dats_dense_array_new(data_size);
 
     dats_dynamic_array_add(&self->component_array, &da);
     self->number_of_component_variation++;
+    return self->number_of_component_variation - 1;
 }
 
 void ents_component_manager_set(ents_component_manager_t *self, ents_entity_t entity, uint64_t component_type, const void *data)
