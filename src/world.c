@@ -58,6 +58,12 @@ void *ents_world_ref_component(ents_world_t *self, ents_entity_t entity, uint64_
     return ents_component_manager_ref(&self->cm, entity, component_type);
 }
 
+void ents_world_remove_component(ents_world_t *self, ents_entity_t entity, uint64_t component_type)
+{
+    ents_entity_manager_remove(&self->em, entity, component_type);
+    ents_component_manager_remove(&self->cm, entity, component_type);
+}
+
 void ents_world_print(const ents_world_t *self)
 {
     ents_entity_manager_print(&self->em);

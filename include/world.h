@@ -3,6 +3,7 @@
 
 #include "entity_manager.h"
 #include "component_manager.h"
+#include <stdint.h>
 
 typedef struct
 {
@@ -23,6 +24,8 @@ void ents_world_set_component(ents_world_t *self, ents_entity_t entity, uint64_t
 const void *ents_world_get_component(const ents_world_t *self, ents_entity_t entity, uint64_t component_type);
 
 void *ents_world_ref_component(ents_world_t *self, ents_entity_t entity, uint64_t component_type);
+
+void ents_world_remove_component(ents_world_t *self, ents_entity_t entity, uint64_t component_type);
 
 void ents_world_print(const ents_world_t *self);
 

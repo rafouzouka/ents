@@ -64,6 +64,12 @@ void ents_entity_manager_set(ents_entity_manager_t *self, ents_entity_t entity, 
     dats_bitset_set(bitset, component_type + 1, true);
 }
 
+void ents_entity_manager_remove(ents_entity_manager_t *self, ents_entity_t entity, uint64_t component_type)
+{
+    dats_bitset_t *bitset = dats_dynamic_array_ref(&self->bitsets, entity.id);
+    dats_bitset_set(bitset, component_type + 1, false);
+}
+
 const void *ents_entity_manager_get_bitset(const ents_entity_manager_t *self, ents_entity_t entity)
 {
     return dats_dynamic_array_get(&self->bitsets, entity.id);

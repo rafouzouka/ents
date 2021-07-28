@@ -26,6 +26,8 @@ void ents_entity_manager_set_bitset_size(ents_entity_manager_t *self, uint64_t b
 
 void ents_entity_manager_set(ents_entity_manager_t *self, ents_entity_t entity, uint64_t component_type);
 
+void ents_entity_manager_remove(ents_entity_manager_t *self, ents_entity_t entity, uint64_t component_type);
+
 const void *ents_entity_manager_get_bitset(const ents_entity_manager_t *self, ents_entity_t entity);
 
 void ents_entity_manager_print(const ents_entity_manager_t *self);

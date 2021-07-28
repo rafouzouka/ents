@@ -15,4 +15,7 @@
 #define ENTS_WORLD_REF_COMPONENT(world, entity, component_type) \
     ents_world_ref_component(&world, entity, ENTS_ID_COMPONENT(component_type))
 
+#define ENTS_WORLD_REMOVE_COMPONENT(world, entity, component_type) \
+    ents_world_remove_component(&world, entity, ENTS_ID_COMPONENT(component_type))
+
 #endif
