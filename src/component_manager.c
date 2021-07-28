@@ -74,6 +74,15 @@ void ents_component_manager_print(const ents_component_manager_t *self)
     }
 }
 
+void ents_component_manager_clear(ents_component_manager_t *self)
+{
+    for (uint64_t i = 0; i < self->number_of_component_variation; i++)
+    {
+        dats_dense_array_t *da = dats_dynamic_array_ref(&self->component_array, i);
+        dats_dense_array_clear(da);
+    }
+}
+
 void ents_component_manager_free(ents_component_manager_t *self)
 {
     for (uint64_t i = 0; i < self->number_of_component_variation; i++)

@@ -70,6 +70,12 @@ void ents_world_print(const ents_world_t *self)
     ents_component_manager_print(&self->cm);
 }
 
+void ents_world_clear(ents_world_t *self)
+{   
+    ents_entity_manager_clear(&self->em);
+    ents_component_manager_clear(&self->cm);
+}
+
 void ents_world_free(ents_world_t *self)
 {
     ents_entity_manager_free(&self->em);

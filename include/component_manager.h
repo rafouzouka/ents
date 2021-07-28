@@ -25,6 +25,8 @@ void ents_component_manager_remove(ents_component_manager_t *self, ents_entity_t
 
 void ents_component_manager_print(const ents_component_manager_t *self);
 
+void ents_component_manager_clear(ents_component_manager_t *self);
+
 void ents_component_manager_free(ents_component_manager_t *self);
 
 #endif

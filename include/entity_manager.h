@@ -32,6 +32,8 @@ const void *ents_entity_manager_get_bitset(const ents_entity_manager_t *self, en
 
 void ents_entity_manager_print(const ents_entity_manager_t *self);
 
+void ents_entity_manager_clear(ents_entity_manager_t *self);
+
 void ents_entity_manager_free(ents_entity_manager_t *self);
 
 #endif

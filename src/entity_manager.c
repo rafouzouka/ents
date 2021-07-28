@@ -86,6 +86,18 @@ void ents_entity_manager_print(const ents_entity_manager_t *self)
     printf("\n");
 }
 
+void ents_entity_manager_clear(ents_entity_manager_t *self)
+{
+    for (uint64_t i = 0; i < dats_dynamic_array_length(&self->bitsets); i++)
+    {
+        dats_bitset_free(dats_dynamic_array_ref(&self->bitsets, i));
+    }
+
+    dats_queue_clear(&self->available_ids);
+    dats_dynamic_array_clear(&self->bitsets);
+    self->next_higher_available_id = 0;
+}
+
 void ents_entity_manager_free(ents_entity_manager_t *self)
 {
     for (uint64_t i = 0; i < dats_dynamic_array_length(&self->bitsets); i++)
@@ -96,4 +108,5 @@ void ents_entity_manager_free(ents_entity_manager_t *self)
     dats_dynamic_array_free(&self->bitsets);
     dats_queue_free(&self->available_ids);
     self->next_higher_available_id = 0;
+    self->bitset_size = 0;
 }
