@@ -6,4 +6,6 @@
 #include "entity_manager.h"
 #include "component_manager.h"
 
+#include "world.h"
+
 #endif
