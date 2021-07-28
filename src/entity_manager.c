@@ -47,6 +47,9 @@ ents_entity_t ents_entity_manager_create_entity(ents_entity_manager_t *self)
 
 void ents_entity_manager_destroy_entity(ents_entity_manager_t *self, ents_entity_t entity)
 {
+    dats_bitset_t *bitset = dats_dynamic_array_ref(&self->bitsets, entity.id);
+    dats_bitset_reset(bitset);
+
     dats_queue_enqueue(&self->available_ids, &entity.id);
 }
 
@@ -57,7 +60,13 @@ void ents_entity_manager_set_bitset_size(ents_entity_manager_t *self, uint64_t b
 
 void ents_entity_manager_set(ents_entity_manager_t *self, ents_entity_t entity, uint64_t component_type)
 {
-    
+    dats_bitset_t *bitset = dats_dynamic_array_ref(&self->bitsets, entity.id);
+    dats_bitset_set(bitset, component_type + 1, true);
+}
+
+const void *ents_entity_manager_get_bitset(const ents_entity_manager_t *self, ents_entity_t entity)
+{
+    return dats_dynamic_array_get(&self->bitsets, entity.id);
 }
 
 void ents_entity_manager_print(const ents_entity_manager_t *self)

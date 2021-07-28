@@ -45,6 +45,12 @@ void *ents_component_manager_ref(ents_component_manager_t *self, ents_entity_t e
     return dats_dense_array_ref(dense_array, entity.id);
 }
 
+void ents_component_manager_remove(ents_component_manager_t *self, ents_entity_t entity, uint64_t component_type)
+{
+    dats_dense_array_t *da = dats_dynamic_array_ref(&self->component_array, component_type);
+    dats_dense_array_remove(da, entity.id);
+}
+
 void ents_component_manager_print(const ents_component_manager_t *self)
 {
     for (uint64_t i = 0; i < self->number_of_component_variation; i++)

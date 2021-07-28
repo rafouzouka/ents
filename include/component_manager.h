@@ -21,6 +21,8 @@ const void *ents_component_manager_get(const ents_component_manager_t *self, ent
 
 void *ents_component_manager_ref(ents_component_manager_t *self, ents_entity_t entity, uint64_t component_type);
 
+void ents_component_manager_remove(ents_component_manager_t *self, ents_entity_t entity, uint64_t component_type);
+
 void ents_component_manager_print(const ents_component_manager_t *self);
 
 void ents_component_manager_free(ents_component_manager_t *self);

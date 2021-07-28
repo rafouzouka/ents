@@ -1,6 +1,7 @@
 #include "world.h"
 #include "component_manager.h"
 #include "entity_manager.h"
+#include <dats/bitset.h>
 #include <stdint.h>
 
 ents_world_t ents_world_new()
@@ -20,6 +21,16 @@ ents_entity_t ents_world_create_entity(ents_world_t *self)
 
 void ents_world_destroy_entity(ents_world_t *self, ents_entity_t entity)
 {
+    const dats_bitset_t *bitset = ents_entity_manager_get_bitset(&self->em, entity);
+
+    for (uint64_t i = 0; i < bitset->size; i++)
+    {
+        if (dats_bitset_is_set(bitset, i+1) == true)
+        {
+            ents_component_manager_remove(&self->cm, entity, i);
+        }
+    }
+
     ents_entity_manager_destroy_entity(&self->em, entity);
 }
 
