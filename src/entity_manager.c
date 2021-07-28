@@ -1,4 +1,5 @@
 #include <dats/bitset.h>
+#include <dats/dynamic_array.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -28,8 +29,6 @@ ents_entity_t ents_entity_manager_create_entity(ents_entity_manager_t *self)
         };
         free(available_id);
 
-        dats_bitset_t bitset = dats_bitset_new(self->bitset_size);
-        dats_dynamic_array_insert(&self->bitsets, e.id, &bitset);
         return e;
     }
     else
@@ -44,7 +43,6 @@ ents_entity_t ents_entity_manager_create_entity(ents_entity_manager_t *self)
 
         return e;
     }
-
 }
 
 void ents_entity_manager_destroy_entity(ents_entity_manager_t *self, ents_entity_t entity)
@@ -59,23 +57,11 @@ void ents_entity_manager_set_bitset_size(ents_entity_manager_t *self, uint64_t b
 
 void ents_entity_manager_set(ents_entity_manager_t *self, ents_entity_t entity, uint64_t component_type)
 {
-    dats_bitset_t bitset = dats_bitset_new(self->bitset_size);
-
-    if (entity.id > dats_dynamic_array_length(&self->bitsets) - 1)
-    {
-        dats_dynamic_array_add(&self->bitsets, &bitset);
-    }
-    else
-    {
-        dats_dynamic_array_insert(&self->bitsets, entity.id, &bitset);
-    }
+    
 }
 
 void ents_entity_manager_print(const ents_entity_manager_t *self)
 {
-    uint64_t len = dats_dynamic_array_length(&self->bitsets);
-    printf("LENGTH: %ld\n", len);
-
     for (uint64_t i = 0; i < dats_dynamic_array_length(&self->bitsets); i++)
     {
         printf("[%ld] -> ", i);
