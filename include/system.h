@@ -10,7 +10,7 @@ typedef struct
     const char *name;
     const char *query;
     dats_bitset_t bitset;
-    void (*callback)();
+    void (*callback)(const char *str);
 } ents_system_t;
 
 #endif

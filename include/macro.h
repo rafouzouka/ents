@@ -21,8 +21,8 @@
 #define ENTS_WORLD_COMPONENT_REMOVE(world, entity, component_type) \
     ents_world_component_remove(&world, entity, ENTS_COMPONENT_ID(component_type))
 
-#define ENTS_WORLD_SYSTEM_ADD(world, func, ...) \
-    ents_world_system_add(&world, &(ents_system_t){ \
+#define ENTS_SCHEDULER_SYSTEM_ADD(scheduler, world, func, ...) \
+    ents_scheduler_system_add(&scheduler, &world, &(ents_system_t){ \
         .name = #func, \
         .query =  #__VA_ARGS__, \
         .callback = func \
