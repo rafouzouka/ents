@@ -1,8 +1,11 @@
-#include "world.h"
-#include "component_manager.h"
-#include "entity_manager.h"
 #include <dats/bitset.h>
 #include <stdint.h>
+
+#include "scheduler.h"
+#include "world.h"
+
+#include "component_manager.h"
+#include "entity_manager.h"
 
 ents_world_t ents_world_new()
 {
@@ -34,9 +37,9 @@ void ents_world_destroy_entity(ents_world_t *self, ents_entity_t entity)
     ents_entity_manager_destroy_entity(&self->em, entity);
 }
 
-uint64_t ents_world_register_component(ents_world_t *self, uint64_t data_size)
+uint64_t ents_world_register_component(ents_world_t *self, ents_component_desc_t *component_desc)
 {
-    uint64_t component_id = ents_component_manager_register(&self->cm, data_size);
+    uint64_t component_id = ents_component_manager_register(&self->cm, component_desc);
     ents_entity_manager_set_bitset_size(&self->em, component_id + 1);
 
     return component_id;
@@ -64,6 +67,11 @@ void ents_world_remove_component(ents_world_t *self, ents_entity_t entity, uint6
     ents_component_manager_remove(&self->cm, entity, component_type);
 }
 
+void ents_world_add_system(ents_world_t *self, ents_system_t *system)
+{
+    ents_scheduler_add_system(&self->sh, system);
+}
+
 void ents_world_print(const ents_world_t *self)
 {
     ents_entity_manager_print(&self->em);
@@ -80,4 +88,5 @@ void ents_world_free(ents_world_t *self)
 {
     ents_entity_manager_free(&self->em);
     ents_component_manager_free(&self->cm);
+    ents_scheduler_free(&self->sh);
 }

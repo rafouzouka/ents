@@ -1,0 +1,15 @@
+#ifndef SYSTEM_H
+#define SYSTEM_H
+
+#include <stdint.h>
+
+#include <dats/dats.h>
+
+typedef struct
+{
+    const char *query;
+    dats_bitset_t bitset;
+    void (*callback)();
+} ents_system_t;
+
+#endif

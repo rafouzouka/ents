@@ -1,19 +1,22 @@
 #ifndef COMPONENT_MANAGER_H
 #define COMPONENT_MANAGER_H
 
-#include <ents/entity.h>
 #include <stdint.h>
 #include <dats/dats.h>
 
+#include "entity.h"
+#include "component.h"
+
 typedef struct
 {
-    dats_dynamic_array_t component_array;    
+    dats_dynamic_array_t component_descs;
+    dats_dynamic_array_t component_array;
     uint64_t number_of_component_variation;
 } ents_component_manager_t;
 
 ents_component_manager_t ents_component_manager_new();
 
-uint64_t ents_component_manager_register(ents_component_manager_t *self, uint64_t data_size);
+uint64_t ents_component_manager_register(ents_component_manager_t *self, ents_component_desc_t *component_desc);
 
 void ents_component_manager_set(ents_component_manager_t *self, ents_entity_t entity, uint64_t component_type, const void *data);
 
