@@ -16,21 +16,21 @@ typedef struct
 
 ents_world_t ents_world_new();
 
-ents_entity_t ents_world_create_entity(ents_world_t *self);
+ents_entity_t ents_world_entity_create(ents_world_t *self);
 
-void ents_world_destroy_entity(ents_world_t *self, ents_entity_t entity);
+void ents_world_entity_destroy(ents_world_t *self, ents_entity_t entity);
 
-uint64_t ents_world_register_component(ents_world_t *self, ents_component_desc_t *component_desc);
+uint64_t ents_world_component_register(ents_world_t *self, ents_component_desc_t *component_desc);
 
-void ents_world_set_component(ents_world_t *self, ents_entity_t entity, uint64_t component_type, const void *data);
+void ents_world_component_set(ents_world_t *self, ents_entity_t entity, uint64_t component_type, const void *data);
 
-const void *ents_world_get_component(const ents_world_t *self, ents_entity_t entity, uint64_t component_type);
+const void *ents_world_component_get(const ents_world_t *self, ents_entity_t entity, uint64_t component_type);
 
-void *ents_world_ref_component(ents_world_t *self, ents_entity_t entity, uint64_t component_type);
+void *ents_world_component_ref(ents_world_t *self, ents_entity_t entity, uint64_t component_type);
 
-void ents_world_remove_component(ents_world_t *self, ents_entity_t entity, uint64_t component_type);
+void ents_world_component_remove(ents_world_t *self, ents_entity_t entity, uint64_t component_type);
 
-void ents_world_add_system(ents_world_t *self, ents_system_t *system);
+void ents_world_system_add(ents_world_t *self, ents_system_t *system);
 
 void ents_world_print(const ents_world_t *self);
 
