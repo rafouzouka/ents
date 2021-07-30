@@ -1,10 +1,8 @@
-#include <dats/bitset.h>
-#include <dats/dynamic_array.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-#include <dats/queue.h>
+#include <dats/dats.h>
 
 #include "entity_manager.h"
 
@@ -77,6 +75,8 @@ const void *ents_entity_manager_get_bitset(const ents_entity_manager_t *self, en
 
 void ents_entity_manager_print(const ents_entity_manager_t *self)
 {
+    printf("---- ENTITIES: ----\n");
+
     for (uint64_t i = 0; i < dats_dynamic_array_length(&self->bitsets); i++)
     {
         printf("[%ld] -> ", i);

@@ -1,5 +1,3 @@
-#include <dats/bitset.h>
-#include <dats/dynamic_array.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>

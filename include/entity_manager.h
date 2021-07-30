@@ -1,7 +1,6 @@
 #ifndef ENTITY_MANAGER_H
 #define ENTITY_MANAGER_H
 
-#include <dats/dynamic_array.h>
 #include <stdint.h>
 
 #include <dats/dats.h>

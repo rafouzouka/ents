@@ -1,7 +1,7 @@
-#include <dats/bitset.h>
-#include <dats/dynamic_array.h>
 #include <stdint.h>
 #include <stdio.h>
+
+#include <dats/dats.h>
 
 #include "scheduler.h"
 
@@ -36,7 +36,7 @@ void ents_scheduler_execute(ents_scheduler_t *self)
 
 void ents_scheduler_print(const ents_scheduler_t *self)
 {
-    printf("SYSTEMS:\n");
+    printf("---- SYSTEMS: ----\n");
     for (uint64_t i = 0; i < dats_dynamic_array_length(&self->systems); i++)
     {
         const ents_system_t *system = dats_dynamic_array_get(&self->systems, i);        

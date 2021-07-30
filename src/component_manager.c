@@ -1,10 +1,9 @@
-#include <dats/dynamic_array.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include <dats/dats.h>
-#include <string.h>
 
 #include "component_manager.h"
 
@@ -68,6 +67,7 @@ uint64_t ents_component_manager_get_id_from_name(const ents_component_manager_t 
 
 void ents_component_manager_print(const ents_component_manager_t *self)
 {
+    printf("---- COMPONENTS: ----\n");
     for (uint64_t i = 0; i < self->number_of_component_variation; i++)
     {
         const dats_dense_array_t *da = dats_dynamic_array_get(&self->component_array, i);
