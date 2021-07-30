@@ -7,6 +7,7 @@
 
 typedef struct
 {
+    const char *name;
     const char *query;
     dats_bitset_t bitset;
     void (*callback)();

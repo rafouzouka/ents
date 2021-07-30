@@ -1,9 +1,14 @@
 #include <dats/bitset.h>
+#include <dats/dynamic_array.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <dats/dats.h>
 
 #include "scheduler.h"
 #include "world.h"
-
 #include "component_manager.h"
 #include "entity_manager.h"
 
@@ -11,7 +16,8 @@ ents_world_t ents_world_new()
 {
     ents_world_t world = {
         .em = ents_entity_manager_new(),
-        .cm = ents_component_manager_new()
+        .cm = ents_component_manager_new(),
+        .sh = ents_scheduler_new(),
     };
 
     return world;
@@ -69,6 +75,21 @@ void ents_world_component_remove(ents_world_t *self, ents_entity_t entity, uint6
 
 void ents_world_system_add(ents_world_t *self, ents_system_t *system)
 {
+    system->bitset = dats_bitset_new(self->cm.number_of_component_variation);
+
+    char *str = malloc(sizeof(char) * strlen(system->query) + 1);
+    strcpy(str, system->query);
+
+    char *token = strtok(str, ", ");
+    while (token != NULL)
+    {
+        uint64_t id = ents_component_manager_get_id_from_name(&self->cm, token);
+        dats_bitset_set(&system->bitset, id + 1, true);
+
+        token = strtok(NULL, ", ");
+    }
+
+    free(str);
     ents_scheduler_add_system(&self->sh, system);
 }
 
@@ -76,6 +97,7 @@ void ents_world_print(const ents_world_t *self)
 {
     ents_entity_manager_print(&self->em);
     ents_component_manager_print(&self->cm);
+    ents_scheduler_print(&self->sh);
 }
 
 void ents_world_clear(ents_world_t *self)

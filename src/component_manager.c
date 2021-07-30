@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #include <dats/dats.h>
+#include <string.h>
 
 #include "component_manager.h"
 
@@ -50,6 +51,19 @@ void ents_component_manager_remove(ents_component_manager_t *self, ents_entity_t
 {
     dats_dense_array_t *da = dats_dynamic_array_ref(&self->component_array, component_type);
     dats_dense_array_remove(da, entity.id);
+}
+
+uint64_t ents_component_manager_get_id_from_name(const ents_component_manager_t *self, const char *name)
+{
+    for (uint64_t i = 0; i < dats_dynamic_array_length(&self->component_descs); i++)
+    {
+        const ents_component_desc_t *component_desc = dats_dynamic_array_get(&self->component_descs, i);
+        if (strcmp(component_desc->name, name) == 0)
+        {
+            return i;
+        }
+    }
+    exit(-1);
 }
 
 void ents_component_manager_print(const ents_component_manager_t *self)

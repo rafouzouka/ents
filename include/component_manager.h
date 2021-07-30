@@ -9,6 +9,7 @@
 
 typedef struct
 {
+    // probably use a bst or hashmap for O(logn) at least
     dats_dynamic_array_t component_descs;
     dats_dynamic_array_t component_array;
     uint64_t number_of_component_variation;
@@ -25,6 +26,8 @@ const void *ents_component_manager_get(const ents_component_manager_t *self, ent
 void *ents_component_manager_ref(ents_component_manager_t *self, ents_entity_t entity, uint64_t component_type);
 
 void ents_component_manager_remove(ents_component_manager_t *self, ents_entity_t entity, uint64_t component_type);
+
+uint64_t ents_component_manager_get_id_from_name(const ents_component_manager_t *self, const char *name);
 
 void ents_component_manager_print(const ents_component_manager_t *self);
 
