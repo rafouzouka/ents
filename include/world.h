@@ -15,6 +15,8 @@ ents_world_t ents_world_new();
 
 ents_component_type_t ents_world_component_register(ents_world_t *self, ents_component_desc_t *desc);
 
+ents_entity_t ents_world_entity_create(ents_world_t *self);
+
 void ents_world_free(ents_world_t *self);
 
 #endif
