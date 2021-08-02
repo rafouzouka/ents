@@ -2,7 +2,7 @@
 
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c11 -g -I./include/  # -DNDEBUG
-INC = 
+INC = -lents -ldats
 EXEC = prog
 PREFIX = /usr/local
 
@@ -17,20 +17,22 @@ DELETE_FOLDER = rm -rf
 lib: $(OBJ)
 	ar rcs bin/$(LIB) $^
 
-debug: sandbox/main.c include/ents.h install
-	$(CC) $< -lents -ldats -o bin/$@ $(CFLAGS)
-	./bin/$@
+prog: sandbox/main.c include/ents.h lib
+	$(CC) $< $(INC) -o bin/$(EXEC) $(CFLAGS)
 
-obj/%.o: src/%.c folders
-	$(CC) -c $< -o $@ $(CFLAGS)
+run: prog
+	./bin/$(EXEC)
 
-val: debug
-	valgrind --leak-check=full --track-origins=yes ./bin/debug
+val: prog
+	valgrind --leak-check=full --track-origins=yes ./bin/$(EXEC)
  
-test: install 
+test: lib 
 	cmake -S test/ -B test/build
 	cmake --build test/build
 	ctest --test-dir test/build/ --output-on-failure
+
+obj/%.o: src/%.c folders
+	$(CC) -c $< -o $@ $(CFLAGS)
 
 .PHONY: clean folders help uninstall
 
@@ -45,10 +47,6 @@ uninstall:
 	rm -rf $(DESTDIR)$(PREFIX)/include/ents/
 
 help:
-	@$(PRINT) "make debug : building the lib and execute and debug program for experimenting."
-	@$(PRINT) "make lib     : creating a lib .a from sources."
-	@$(PRINT) "make clean   : deleting all non-source files."
-	@$(PRINT) "make folders : creating the necessary folders."
 	@$(PRINT) "make help    : get help for the commands."
 
 folders:
