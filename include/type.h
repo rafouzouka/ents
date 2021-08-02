@@ -21,6 +21,8 @@ bool ents_type_has(const ents_type_t *self, uint64_t component_type);
 
 void ents_type_clear(ents_type_t *self);
 
+ents_type_t ents_type_clone(const ents_type_t *self);
+
 void ents_type_print(const ents_type_t *self);
 
 void ents_type_free(ents_type_t *self);
