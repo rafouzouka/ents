@@ -1,7 +1,7 @@
 # -*- MakeFile -*-
 
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c11 -g -I./include/  # -DNDEBUG
+CFLAGS = -Wall -Wextra -std=c11 -g -I./include/ -L./bin/ # -DNDEBUG
 INC = -lents -ldats
 EXEC = prog
 PREFIX = /usr/local
