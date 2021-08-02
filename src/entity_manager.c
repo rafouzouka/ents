@@ -1,6 +1,7 @@
 #include <dats/dynamic_array.h>
 #include <dats/queue.h>
 #include <stdint.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "entity_manager.h"
@@ -17,7 +18,7 @@ ents_entity_manager_t ents_entity_manager_new()
     return em;
 }
 
-ents_entity_t ents_entity_manager_create_entity(ents_entity_manager_t *self)
+ents_entity_t ents_entity_manager_entity_create(ents_entity_manager_t *self)
 {
     if (dats_queue_length(&self->available_ids) > 0)
     {
@@ -39,6 +40,43 @@ ents_entity_t ents_entity_manager_create_entity(ents_entity_manager_t *self)
         dats_dynamic_array_add(&self->entity_type, &type);
 
         return e;
+    }
+}
+
+void ents_entity_manager_entity_set_component(ents_entity_manager_t *self, ents_entity_t entity, uint64_t component_type)
+{
+    ents_type_t *type = dats_dynamic_array_ref(&self->entity_type, entity.id);
+    ents_type_add(type, component_type);
+}
+
+void ents_entity_manager_entity_remove_component(ents_entity_manager_t *self, ents_entity_t entity, uint64_t component_type)
+{
+    ents_type_t *type = dats_dynamic_array_ref(&self->entity_type, entity.id);
+    ents_type_remove(type, component_type);
+}
+
+bool ents_entity_manager_entity_has_component(const ents_entity_manager_t *self, ents_entity_t entity, uint64_t component_type)
+{
+    const ents_type_t *type = dats_dynamic_array_get(&self->entity_type, entity.id);
+    return ents_type_has(type, component_type);
+}
+
+void ents_entity_manager_entity_destroy(ents_entity_manager_t *self, ents_entity_t entity)
+{
+    dats_queue_enqueue(&self->available_ids, &entity.id);
+    ents_type_t *type = dats_dynamic_array_ref(&self->entity_type, entity.id);
+    ents_type_clear(type);
+}
+
+void ents_entity_manager_print(const ents_entity_manager_t *self)
+{
+    printf("ENTITIES: \n");
+    for (uint64_t i = 0; i < dats_dynamic_array_length(&self->entity_type); i++)
+    {
+        printf("[%ld]: ", i);
+        const ents_type_t *type = dats_dynamic_array_get(&self->entity_type, i);
+        ents_type_print(type);
+        printf("\n");
     }
 }
 
